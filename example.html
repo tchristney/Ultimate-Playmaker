@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Example Play</title>
+	<meta name="Author" content="Tony Christney"/>
+	<link rel="stylesheet" href="playmaker.css" type="text/css"/>
+	<script type="text/javascript" src="playmaker.js"></script>
+  </head>
+  <body>
+  <table>
+	  <tbody>
+	  <tr>
+		  <td>
+		      <h2>Example</h2>
+		  	  <div>
+				  <img class="button" id="play_example" src="play.png"></img>
+				  <img class="button" id="pause_example" src="pause.png"></img>
+			  </div>
+			  <canvas class="ultifield" id="example">No Canvas</canvas>
+		  </td>
+	   </tr>
+	   </tbody>
+  </table>
+
+  </body>
+	<script type="text/javascript">
+
+	function setupVertical( g )
+	{
+		g.offence.players[0].startAt(20,80);
+		g.offence.players[1].startAt(20,77);
+		g.offence.players[2].startAt(20,74);
+		g.offence.players[3].startAt(20,71);
+		g.offence.players[4].startAt(20,68);
+		g.offence.players[5].startAt(20,90);
+		g.offence.players[6].startAt(30,90);
+
+		g.giveDisc( g.offence.players[5] );
+	}
+
+	var example = new net.christney.playbook.Game( "example" );
+	setupVertical( example );
+	example.offence.players[0].runAtSpeed( 3, 5 );
+	example.offence.players[0].runAtSpeed( -10, 0 );
+	example.offence.players[0].runAtSpeed( 10, -60 );
+	example.offence.players[4].wait(1.5);
+	example.offence.players[4].runAtSpeed( 10, 10 );
+	example.throwDisc( 1.7, example.offence.players[4] );
+	example.throwDisc( 4.6, example.offence.players[0] );
+
+	example.draw();
+
+	document.getElementById("play_example").addEventListener( "click",
+			function () {
+				example.reset();
+				net.christney.playbook.Animator.startGame( example );
+			}, true );
+	document.getElementById("pause_example").addEventListener( "click",
+			function () { example.isPaused = !example.isPaused; }, true );
+	</script>
+</html>
+
